@@ -1,6 +1,7 @@
 import { useState } from "react";
 import NannyCard from "../../components/NannyCard/NannyCard";
 import AppointmentModal from "../../components/Modals/AppointmentModal/AppointmentModal";
+import { fetchNanniesFromDB } from "../../firebase/services";
 import styles from "./NanniesPage.module.css";
 
 export default function NanniesPage({
@@ -12,38 +13,51 @@ export default function NanniesPage({
   const [visibleCount, setVisibleCount] = useState(3);
   const [selectedNanny, setSelectedNanny] = useState(null);
 
-
   const getFilteredNannies = () => {
-    let sorted = [...nannies];
+    let result = [...nannies];
 
+    // Filter by price (less or greater than 18)
+    if (filter === "less-18") {
+      result = result.filter((item) => item.price_per_hour <= 18);
+    } else if (filter === "greater-18") {
+      result = result.filter((item) => item.price_per_hour > 18);
+    }
+
+    // Sort accordingly
     switch (filter) {
-      case "price-asc":
-        return sorted.sort((a, b) => a.price_per_hour - b.price_per_hour);
-      case "price-desc":
-        return sorted.sort((a, b) => b.price_per_hour - a.price_per_hour);
-      case "popular":
-        return sorted.sort((a, b) => b.rating - a.rating);
       case "a-z":
-        return sorted.sort((a, b) => a.name.localeCompare(b.name));
+        return result.sort((a, b) => a.name.localeCompare(b.name));
       case "z-a":
-        return sorted.sort((a, b) => b.name.localeCompare(a.name));
+        return result.sort((a, b) => b.name.localeCompare(a.name));
+      case "popular":
+        return result.sort((a, b) => b.rating - a.rating);
+      case "not-popular":
+        return result.sort((a, b) => a.rating - b.rating);
       default:
-        return sorted;
+        // Default sort for filtered results by price
+        if (filter === "less-18" || filter === "greater-18") {
+          return result.sort((a, b) => a.price_per_hour - b.price_per_hour);
+        }
+        return result;
     }
   };
 
   const filteredNannies = getFilteredNannies();
   const visibleNannies = filteredNannies.slice(0, visibleCount);
 
-  const handleLoadMore = () => {
-    setVisibleCount((prev) => prev + 3);
+  const handleLoadMore = async () => {
+    try {
+      // Trigger a new database request
+      await fetchNanniesFromDB();
+      setVisibleCount((prev) => prev + 3);
+    } catch (error) {
+      console.error("Failed to load more nannies from DB:", error);
+    }
   };
 
   return (
     <main className={styles.mainContainer}>
       <div className={styles.contentWrapper}>
-        
-
         <section className={styles.filterSection}>
           <label htmlFor="filter-select" className={styles.filterLabel}>
             Filters
@@ -51,15 +65,19 @@ export default function NanniesPage({
           <select
             id="filter-select"
             value={filter}
-            onChange={(e) => setFilter(e.target.value)}
+            onChange={(e) => {
+              setFilter(e.target.value);
+              setVisibleCount(3);
+            }}
             className={styles.filterSelect}
           >
             <option value="all">Show all</option>
-            <option value="popular">Popular</option>
-            <option value="price-asc">Price: Low to High</option>
-            <option value="price-desc">Price: High to Low</option>
             <option value="a-z">A to Z</option>
             <option value="z-a">Z to A</option>
+            <option value="less-18">Less than 18$</option>
+            <option value="greater-18">Greater than 18$</option>
+            <option value="popular">Popular</option>
+            <option value="not-popular">Not popular</option>
           </select>
         </section>
 
@@ -67,7 +85,7 @@ export default function NanniesPage({
           {visibleNannies.length > 0 ? (
             visibleNannies.map((nanny) => (
               <NannyCard
-                key={nanny.id || nanny.name}
+                key={nanny.name}
                 nanny={nanny}
                 isFavorite={favorites.some((item) => item.name === nanny.name)}
                 onToggleFavorite={() => onToggleFavorite(nanny)}
@@ -81,7 +99,6 @@ export default function NanniesPage({
           )}
         </section>
 
-
         {visibleCount < filteredNannies.length && (
           <div className={styles.loadMoreContainer}>
             <button
@@ -93,10 +110,8 @@ export default function NanniesPage({
             </button>
           </div>
         )}
-
       </div>
 
-   
       {selectedNanny && (
         <AppointmentModal
           nanny={selectedNanny}

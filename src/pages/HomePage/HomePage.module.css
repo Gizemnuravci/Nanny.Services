@@ -1,33 +1,33 @@
 .pageWrapper {
   width: 100%;
   min-height: 100vh;
-  padding: 16px 32px;
+  padding: 20px 32px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f0fdf4;
+  background-color: #f3f4f6;
   box-sizing: border-box;
 }
 
 .heroCard {
   width: 100%;
-  max-width: 1280px;
-  min-height: 480px;
-  border-radius: 20px;
+  max-width: 1376px;
+  min-height: 680px;
+  border-radius: 30px;
   display: flex;
   overflow: hidden;
   position: relative;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  background: #065f46;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+  background: #095743;
 }
 
 .leftContent {
-  flex: 0.35;
-  background-color: #065f46;
-  padding: 16px 16px 16px 16px;
+  flex: 1.1;
+  background-color: #095743;
+  padding: 50px 60px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   color: #fff;
   position: relative;
   z-index: 10;
@@ -36,57 +36,66 @@
 .brandHeader {
   display: flex;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 24px;
 }
 
 .logo {
-  font-size: 12px;
+  font-size: 24px;
   font-weight: 700;
-  letter-spacing: -0.03em;
-  color: #f0fdf4;
+  letter-spacing: -0.02em;
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 .mainText {
-  margin-top: 0;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-grow: 1;
 }
 
 .title {
-  font-size: 26px;
+  font-size: 64px;
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 1.08;
   letter-spacing: -0.03em;
-  margin: 0 0 8px 0;
-  color: #fff;
+  margin: 0 0 24px 0;
+  color: #ffffff;
 }
 
 .subtitle {
-  font-size: 10px;
-  line-height: 1.3;
+  font-size: 24px;
+  line-height: 1.35;
   letter-spacing: -0.01em;
-  color: rgba(255, 255, 255, 0.9);
-  margin: 0 0 10px 0;
-  max-width: 220px;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0 0 48px 0;
+  max-width: 480px;
 }
 
 .getStartedBtn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  padding: 8px 16px;
+  gap: 12px;
+  padding: 16px 40px;
   background: transparent;
   color: #fff;
   border: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: 999px;
-  font-size: 11px;
-  font-weight: 500;
+  font-size: 18px;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  align-self: flex-start;
+  outline: none;
 }
 
 .getStartedBtn:hover {
-  background-color: #059669;
-  border-color: #059669;
+  background-color: #ffffff;
+  color: #095743;
+  border-color: #ffffff;
 }
 
 .arrowIcon {
@@ -95,10 +104,6 @@
 
 .getStartedBtn:hover .arrowIcon {
   transform: translate(2px, -2px);
-}
-
-.heroCard {
-  position: relative;
 }
 
 .heroImage {
@@ -112,14 +117,14 @@
 }
 
 .rightContent {
-  flex: 1.65;
+  flex: 0.9;
   position: relative;
   background: linear-gradient(
     180deg,
-    rgba(0, 0, 0, 0.2) 0%,
+    rgba(0, 0, 0, 0.3) 0%,
     rgba(0, 0, 0, 0.05) 100%
   );
-  padding: 16px 20px 16px;
+  padding: 50px 60px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -138,34 +143,40 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  gap: 12px;
+  gap: 24px;
 }
 
 .navLinks {
   display: flex;
-  gap: 8px;
+  gap: 24px;
 }
 
 .navBtn {
   background: transparent;
   border: none;
   color: #fff;
-  font-size: 8px;
+  font-size: 16px;
   font-weight: 500;
   cursor: pointer;
   position: relative;
-  padding: 4px 0;
+  padding: 6px 0;
   opacity: 0.85;
+  transition: opacity 0.2s ease;
+}
+
+.navBtn:hover {
+  opacity: 1;
 }
 
 .activeLink {
   opacity: 1;
+  font-weight: 600;
 }
 
 .activeLink::after {
   content: "";
   position: absolute;
-  bottom: -6px;
+  bottom: -4px;
   left: 50%;
   transform: translateX(-50%);
   width: 8px;
@@ -176,56 +187,102 @@
 
 .authButtons {
   display: flex;
-  gap: 6px;
+  gap: 12px;
 }
 
 .loginBtn,
 .registerBtn {
   border-radius: 999px;
-  font-size: 9px;
+  font-size: 16px;
   font-weight: 500;
-  padding: 6px 10px;
+  padding: 12px 30px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .loginBtn {
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.4);
   color: #fff;
 }
 
 .loginBtn:hover {
-  background: rgba(255, 255, 255, 0.18);
-  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.8);
 }
 
 .registerBtn {
   background-color: #10b981;
-  border: none;
+  border: 1px solid #10b981;
   color: #fff;
 }
 
 .registerBtn:hover {
   background-color: #059669;
+  border-color: #059669;
+}
+
+.userMenu {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.userIconWrapper {
+  width: 40px;
+  height: 40px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.userIcon {
+  width: 20px;
+  height: 20px;
+  fill: #095743;
+}
+
+.userName {
+  font-weight: 600;
+  color: #ffffff;
+  font-size: 16px;
+}
+
+.logoutBtn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #ffffff;
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logoutBtn:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: #ffffff;
 }
 
 .statisticsCard {
   align-self: flex-end;
-  background-color: rgba(255, 255, 255, 0.95);
-  border-radius: 14px;
-  padding: 8px 12px;
+  background-color: rgba(255, 255, 255, 0.98);
+  border-radius: 20px;
+  padding: 16px 24px;
   display: flex;
   align-items: center;
-  gap: 10px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  gap: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
 .checkIconWrapper {
-  width: 24px;
-  height: 24px;
-  border-radius: 6px;
-  background-color: #10b981;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background-color: #095743;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -233,125 +290,90 @@
 }
 
 .staTitle {
-  font-size: 8px;
-  color: rgba(17, 17, 17, 0.65);
-  margin: 0 0 1px 0;
+  font-size: 14px;
+  color: rgba(17, 17, 17, 0.6);
+  margin: 0 0 4px 0;
 }
 
 .staCount {
   margin: 0;
-  font-size: 12px;
+  font-size: 24px;
   line-height: 1.1;
   font-weight: 700;
-  color: #11101c;
+  color: #095743;
 }
 
-@media (max-width: 1280px) {
-  .pageWrapper {
-    padding: 24px 32px;
-  }
-
-  .leftContent {
-    padding: 48px;
-  }
-
-  .rightContent {
-    padding: 32px 40px;
-  }
-
+@media (max-width: 1200px) {
   .title {
-    font-size: 54px;
+    font-size: 48px;
   }
-
   .subtitle {
-    font-size: 22px;
+    font-size: 20px;
+  }
+  .leftContent {
+    padding: 40px;
+  }
+  .rightContent {
+    padding: 40px;
   }
 }
 
-@media (max-width: 1023px) {
-  .pageWrapper {
-    padding: 16px;
-  }
-
+@media (max-width: 992px) {
   .heroCard {
     flex-direction: column;
     min-height: auto;
   }
-
   .leftContent {
-    padding: 40px 32px;
+    flex: none;
+    padding: 60px 40px;
   }
-
   .rightContent {
+    flex: none;
     min-height: 480px;
-    padding: 32px;
+    padding: 60px 40px;
   }
-
-  .title {
-    font-size: 48px;
-  }
-
-  .subtitle {
-    font-size: 20px;
-    margin-bottom: 40px;
+  .statisticsCard {
+    align-self: center;
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .pageWrapper {
     padding: 0;
   }
   .heroCard {
     border-radius: 0;
   }
-  .leftContent {
-    padding: 32px 20px;
-  }
-
-  .rightContent {
-    padding: 24px 20px 32px 20px;
-    min-height: 420px;
-  }
-
   .title {
-    font-size: 36px;
-    line-height: 1.1;
+    font-size: 38px;
   }
-
   .subtitle {
-    font-size: 16px;
+    font-size: 18px;
     margin-bottom: 32px;
   }
-
-  .getStartedBtn {
-    padding: 14px 28px;
-    font-size: 16px;
-    width: 100%;
-    justify-content: center;
-  }
-
   .navHeader {
     flex-direction: column;
     align-items: flex-start;
-    gap: 16px;
+    gap: 20px;
   }
-  .authButtons {
+  .authButtons, .userMenu {
     width: 100%;
+    justify-content: flex-start;
   }
+}
 
-  .loginBtn,
-  .registerBtn {
-    flex: 1;
-    padding: 12px 16px;
+@media (max-width: 480px) {
+  .title {
+    font-size: 32px;
+  }
+  .subtitle {
+    font-size: 16px;
+  }
+  .getStartedBtn {
+    width: 100%;
     text-align: center;
-    font-size: 14px;
   }
   .statisticsCard {
-    align-self: center;
     width: 100%;
-    padding: 20px;
-  }
-  .staCount {
-    font-size: 20px;
   }
 }

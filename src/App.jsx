@@ -1,50 +1,107 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
+import { useMemo, useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { onAuthStateChanged } from "firebase/auth";
+
 import Header from "./components/Header/Header";
 import HomePage from "./pages/HomePage/HomePage";
 import NanniesPage from "./pages/NanniesPage/NanniesPage";
 import FavoritePage from "./pages/FavoritePage/FavoritePage";
-import AppointmentModal from "./components/Modals/AppointmentModal/AppointmentModal";
 import AuthModal from "./components/Modals/AuthModal/AuthModal";
+import Unauthorized from "./components/Modals/Unauthorized/Unauthorized";
+
+import { auth } from "./firebase/firebase.config";
+import {
+  checkAndSeedDatabase,
+  fetchNanniesFromDB,
+  fetchFavoritesFromDB,
+  addFavoriteToDB,
+  removeFavoriteFromDB,
+  logoutUser,
+} from "./firebase/services";
 import babysitters from "./data/babysitters.json";
-import { useMemo, useState, useEffect } from "react";
+
+import { setUser, clearUser } from "./redux/auth/authSlice";
+import { setNannies, setFavorites, toggleFavorite } from "./redux/nannies/nanniesSlice";
 
 export default function App() {
-  const [favorites, setFavorites] = useState([]);
-  const [user, setUser] = useState(null);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.user);
+  const favorites = useSelector((state) => state.nannies.favorites);
+  const nannies = useSelector((state) => state.nannies.items);
+
   const [authModalMode, setAuthModalMode] = useState(null);
 
-  // Load user from localStorage on mount
+  // 1. Seed database and fetch initial nannies
   useEffect(() => {
-    const savedUser = localStorage.getItem("nanny_user");
-    if (savedUser) {
-      setUser(JSON.parse(savedUser));
-    }
-  }, []);
+    const initializeData = async () => {
+      try {
+        await checkAndSeedDatabase(babysitters);
+        const data = await fetchNanniesFromDB();
+        dispatch(setNannies(data));
+      } catch (error) {
+        console.error("Failed to initialize database or fetch nannies:", error);
+      }
+    };
+    initializeData();
+  }, [dispatch]);
 
-  const handleLogin = (email, password) => {
-    const userData = { email, displayName: email.split("@")[0] };
-    setUser(userData);
-    localStorage.setItem("nanny_user", JSON.stringify(userData));
-    setAuthModalMode(null);
-  };
-
-  const handleRegister = (name, email, password) => {
-    const userData = { email, displayName: name };
-    setUser(userData);
-    localStorage.setItem("nanny_user", JSON.stringify(userData));
-    setAuthModalMode(null);
-  };
-
-  const handleLogout = () => {
-    setUser(null);
-    localStorage.removeItem("nanny_user");
-  };
-
-  const toggleFavorite = (nanny) => {
-    setFavorites((prev) => {
-      const exists = prev.some((item) => item.name === nanny.name);
-      return exists ? prev.filter((item) => item.name !== nanny.name) : [...prev, nanny];
+  // 2. Listen to Auth State changes
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      if (currentUser) {
+        dispatch(
+          setUser({
+            uid: currentUser.uid,
+            email: currentUser.email,
+            displayName: currentUser.displayName,
+          })
+        );
+        // Load favorites for this user
+        try {
+          const userFavs = await fetchFavoritesFromDB(currentUser.uid);
+          dispatch(setFavorites(userFavs));
+        } catch (error) {
+          console.error("Failed to fetch favorites:", error);
+        }
+      } else {
+        dispatch(clearUser());
+        dispatch(setFavorites([]));
+      }
     });
+
+    return () => unsubscribe();
+  }, [dispatch]);
+
+  const handleLogout = async () => {
+    try {
+      await logoutUser();
+    } catch (error) {
+      console.error("Failed to logout user:", error);
+    }
+  };
+
+  const handleToggleFavorite = async (nanny) => {
+    if (!user) {
+      setAuthModalMode("unauthorized");
+      return;
+    }
+
+    const isFav = favorites.some((item) => item.name === nanny.name);
+    // Optimistically update Redux store
+    dispatch(toggleFavorite(nanny));
+
+    try {
+      if (isFav) {
+        await removeFavoriteFromDB(user.uid, nanny.name);
+      } else {
+        await addFavoriteToDB(user.uid, nanny);
+      }
+    } catch (error) {
+      console.error("Failed to sync favorite with database:", error);
+      // Revert if database sync fails
+      dispatch(toggleFavorite(nanny));
+    }
   };
 
   const router = useMemo(
@@ -53,16 +110,7 @@ export default function App() {
         [
           {
             path: "/",
-            element: (
-              <>
-                <Header
-                  user={user}
-                  onOpenAuthModal={setAuthModalMode}
-                  onLogout={handleLogout}
-                />
-                <HomePage onOpenAuth={setAuthModalMode} />
-              </>
-            ),
+            element: <HomePage onOpenAuth={setAuthModalMode} />,
           },
           {
             path: "/nannies",
@@ -74,16 +122,16 @@ export default function App() {
                   onLogout={handleLogout}
                 />
                 <NanniesPage
-                  nannies={babysitters}
+                  nannies={nannies}
                   favorites={favorites}
-                  onToggleFavorite={toggleFavorite}
+                  onToggleFavorite={handleToggleFavorite}
                 />
               </>
             ),
           },
           {
             path: "/favorites",
-            element: (
+            element: user ? (
               <>
                 <Header
                   user={user}
@@ -92,26 +140,33 @@ export default function App() {
                 />
                 <FavoritePage
                   favorites={favorites}
-                  onToggleFavorite={toggleFavorite}
+                  onToggleFavorite={handleToggleFavorite}
                 />
               </>
+            ) : (
+              <Navigate to="/" replace />
             ),
           },
         ],
         { basename: import.meta.env.BASE_URL }
       ),
-    [user, favorites]
+    [user, favorites, nannies]
   );
 
   return (
     <>
       <RouterProvider router={router} />
-      {authModalMode && (
+      {authModalMode && authModalMode !== "unauthorized" && (
         <AuthModal
           mode={authModalMode}
           onClose={() => setAuthModalMode(null)}
           onSwitchMode={setAuthModalMode}
-          onSubmit={authModalMode === "login" ? handleLogin : handleRegister}
+        />
+      )}
+      {authModalMode === "unauthorized" && (
+        <Unauthorized
+          onClose={() => setAuthModalMode(null)}
+          onOpenLogin={() => setAuthModalMode("login")}
         />
       )}
     </>

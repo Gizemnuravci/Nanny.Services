@@ -1,30 +1,75 @@
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import styles from './AuthModal.module.css';
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { registerUser, loginUser } from "../../../firebase/services";
+import styles from "./AuthModal.module.css";
 
+const loginSchema = yup.object().shape({
+  email: yup
+    .string()
+    .email("Invalid email format")
+    .required("Email is required"),
+  password: yup
+    .string()
+    .min(6, "Password must be at least 6 characters")
+    .required("Password is required"),
+});
 
-const AuthModal = ({ mode, onClose, onSwitchMode, onSubmit = () => {} }) => {
-  const isRegister = mode === 'register';
+const registerSchema = yup.object().shape({
+  name: yup.string().required("Name is required"),
+  email: yup
+    .string()
+    .email("Invalid email format")
+    .required("Email is required"),
+  password: yup
+    .string()
+    .min(6, "Password must be at least 6 characters")
+    .required("Password is required"),
+});
 
-  const formik = useFormik({
-    initialValues: {
-      name: '',
-      email: '',
-      password: '',
-    },
-    validationSchema: Yup.object({
-      name: isRegister ? Yup.string().required('Required') : Yup.string(),
-      email: Yup.string().email('Invalid email').required('Required'),
-      password: Yup.string().min(6, 'At least 6 characters').required('Required'),
-    }),
-    onSubmit: (values) => {
-      if (isRegister) {
-        onSubmit(values.name, values.email, values.password);
-      } else {
-        onSubmit(values.email, values.password);
-      }
-    },
+const AuthModal = ({ mode, onClose, onSwitchMode }) => {
+  const isRegister = mode === "register";
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(isRegister ? registerSchema : loginSchema),
+    mode: "onTouched",
   });
+
+  // Reset validation state when mode changes
+  useEffect(() => {
+    reset();
+    setErrorMsg("");
+  }, [mode, reset]);
+
+  // Handle Escape key closure
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") onClose();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [onClose]);
+
+  const onSubmit = async (data) => {
+    try {
+      setErrorMsg("");
+      if (isRegister) {
+        await registerUser(data.name, data.email, data.password);
+      } else {
+        await loginUser(data.email, data.password);
+      }
+      onClose();
+    } catch (error) {
+      setErrorMsg(error.message || "Authentication failed. Please try again.");
+    }
+  };
 
   return (
     <div className={styles.backdrop} onClick={onClose}>
@@ -33,60 +78,66 @@ const AuthModal = ({ mode, onClose, onSwitchMode, onSubmit = () => {} }) => {
           type="button"
           className={styles.closeBtn}
           onClick={onClose}
-        
+          aria-label="Close modal"
         >
-          X
+          ✕
         </button>
 
-        <h2 className={styles.title}>{isRegister ? 'Registration' : 'Log In'}</h2>
+        <h2 className={styles.title}>{isRegister ? "Registration" : "Log In"}</h2>
         <p className={styles.subtitle}>
           {isRegister
-            
-            ? 'Thank you  for your interest in our service ! Please provide the following information. '
-            : 'Welcome back ! Please enter your credentials to access your account.'
-
-          }
+            ? "Thank you for your interest in our service! Please provide the following information."
+            : "Welcome back! Please enter your credentials to access your account."}
         </p>
-        <form onSubmit={formik.handleSubmit} className={styles.form}>
+
+        {errorMsg && <div className={styles.globalError}>{errorMsg}</div>}
+
+        <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
           {isRegister && (
-            <input
-              type="text"
-              name="name"
-              placeholder="Name"
-              {...formik.getFieldProps('name')}
-            
-            />
+            <>
+              <input
+                type="text"
+                placeholder="Name"
+                className={errors.name ? styles.inputError : ""}
+                {...register("name")}
+              />
+              {errors.name && <p className={styles.errorText}>{errors.name.message}</p>}
+            </>
           )}
+
           <input
             type="email"
-            name="email"
             placeholder="Email"
-            {...formik.getFieldProps('email')}
+            className={errors.email ? styles.inputError : ""}
+            {...register("email")}
           />
+          {errors.email && <p className={styles.errorText}>{errors.email.message}</p>}
+
           <input
             type="password"
-            name="password"
             placeholder="Password"
-            {...formik.getFieldProps('password')}
+            className={errors.password ? styles.inputError : ""}
+            {...register("password")}
           />
-          <button
-            type="submit"
-            className={styles.submitBtn}
-          
-          >
-            {isRegister ? 'Sign Up' : 'Log In'}
+          {errors.password && (
+            <p className={styles.errorText}>{errors.password.message}</p>
+          )}
+
+          <button type="submit" className={styles.submitBtn}>
+            {isRegister ? "Sign Up" : "Log In"}
           </button>
         </form>
+
         <div className={styles.switchWrapper}>
           <span>
-            {isRegister ? 'Already have on account?' : "Don't have an account?"}
+            {isRegister ? "Already have an account?" : "Don't have an account?"}
           </span>
           <button
-            type='button'
+            type="button"
             className={styles.switchBtn}
-            onClick={ () => onSwitchMode(isRegister ? 'login' : 'register')}
+            onClick={() => onSwitchMode(isRegister ? "login" : "register")}
           >
-            {isRegister ? 'Log In' : 'Registration'}
+            {isRegister ? "Log In" : "Registration"}
           </button>
         </div>
       </div>

@@ -39,6 +39,9 @@ const nanniesSlice = createSlice({
         state.favorites.push(nanny);
       }
     },
+    setFavorites: (state, action) => {
+      state.favorites = action.payload || [];
+    },
     setLoading: (state, action) => {
       state.isLoading = action.payload;
     },
@@ -54,6 +57,7 @@ export const {
   incrementPage,
   resetPage,
   toggleFavorite,
+  setFavorites,
   setLoading,
   setError,
 } = nanniesSlice.actions;

@@ -1,16 +1,32 @@
-# React + Vite
+# Nanny.Services - Bakıcı Bulma ve Randevu Platformu
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Bu proje, ailelerin ihtiyaçlarına en uygun bakıcıları (nanny) online olarak bulmalarını, detaylı profillerini incelemelerini, favorilerine eklemelerini ve doğrudan randevu oluşturabilmelerini sağlayan 3 sayfalık modern bir web uygulamasıdır.
 
-Currently, two official plugins are available:
+## Proje Konusu
+Nanny.Services, ebeveynlerin bakıcı arayış süreçlerini kolaylaştırmak üzere tasarlanmış; filtreleme, sıralama, favoriler yönetimi ve randevu talebi formları içeren interaktif bir platformdur.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Ana Teknolojiler
+- **Frontend Framework**: React (Vite)
+- **Global State Management**: Redux Toolkit & Redux Persist
+- **Routing**: React Router (DOM)
+- **Database & Authentication**: Firebase Realtime Database & Firebase Authentication
+- **Form Management**: React Hook Form
+- **Validation**: Yup Schema Validation
+- **Styling**: Vanilla CSS (CSS Modules), responsive layout (320px - 1440px)
+- **Icons**: React Icons (Fi icons) & Custom SVG Sprites
 
-## React Compiler
+## Uygulama Özellikleri & Sayfalar
+1. **Home (Ana Sayfa)**: Şirket sloganı, animasyonlu arayüz, "Get started" yönlendirme butonu, deneyimli bakıcı sayısını gösteren istatistik kartı ve dinamik kullanıcı kimlik doğrulama badge'i.
+2. **Nannies (Bakıcı Listesi)**: 
+   - Firebase Realtime Database'den dinamik veri yükleme.
+   - 3'erli kart grupları halinde veri getiren "Load more" butonu (her tıklamada veritabanına yeni bir istek gönderilir).
+   - Filtreleme Seçenekleri: Alfabetik (A'dan Z'ye, Z'den A'ya), Saatlik Ücret (18$'dan az, 18$'dan fazla), Popülerlik (en yüksek puandan en düşüğe, en düşük puandan en yükseğe).
+   - "Read more" butonuyla detaylı biyografi, eğitim, karakter özellikleri ve ebeveyn yorumlarının listelendiği genişletilmiş profil görünümü.
+   - "Make an appointment" butonuyla açılan randevu formu.
+3. **Favorites (Favoriler Sayfası)**: Yalnızca yetkili kullanıcıların erişebileceği, favorilerine ekledikleri bakıcıları filtreleyebilecekleri ve randevu alabilecekleri özel sayfa.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Güvenlik ve Doğrulama
+- **Kimlik Doğrulama**: Giriş Yap (Log In) ve Kayıt Ol (Registration) işlemleri tamamen Firebase Auth ile gerçekleştirilir ve oturum durumu sayfa yenilenmesinde de korunur.
+- **Form Doğrulaması**: Randevu formu ile Giriş/Kayıt formları `react-hook-form` & `yup` kullanılarak zorunlu alan doğrulamalarına tabi tutulmuştur.
+- **Favori Senkronizasyonu**: Kullanıcı giriş yaptığında favori bakıcıları otomatik olarak Firebase Realtime Database (`/users/{userId}/favorites`) ile senkronize edilir. Yetkisiz bir kullanıcı kalp ikonuna tıkladığında giriş yapmaya teşvik eden bir uyarı modalı açılır.
+- **Modaller**: Tüm modaller Backdrop tıklamasıyla, Kapatma (✕) ikonuyla veya `Escape` tuşuna basılarak güvenle kapatılabilir.

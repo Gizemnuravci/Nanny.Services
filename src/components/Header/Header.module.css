@@ -114,3 +114,19 @@
   border-color: #059669;
   color: #059669;
 }
+
+.userIconWrapper {
+  width: 40px;
+  height: 40px;
+  background-color: #10b981;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.userIcon {
+  width: 20px;
+  height: 20px;
+  fill: #ffffff;
+}

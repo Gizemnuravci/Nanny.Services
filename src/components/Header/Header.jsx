@@ -45,6 +45,11 @@ const Header = ({
         <div className={styles.authWrapper}>
           {user ? (
             <div className={styles.userMenu}>
+              <div className={styles.userIconWrapper}>
+                <svg className={styles.userIcon} aria-hidden="true">
+                  <use href={`${import.meta.env.BASE_URL}symbol-defs.svg#icon-mdi_user`} />
+                </svg>
+              </div>
               <span className={styles.userName}>{user.displayName || 'User'}</span>
               <button type="button" className={styles.logoutBtn} onClick={onLogout}>
                 Log Out

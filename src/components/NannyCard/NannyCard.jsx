@@ -83,12 +83,6 @@ export default function NannyCard({ nanny, onBookClick, isFavorite, onToggleFavo
             </div>
 
             <div className={styles.cardActions}>
-              <button type="button" className={styles.userBtn} aria-label="User profile">
-                <svg className={styles.iconUser} aria-hidden="true">
-                  <use href={`${base}symbol-defs.svg#icon-mdi_user`} />
-                </svg>
-              </button>
-
               <button
                 type="button"
                 onClick={onToggleFavorite}

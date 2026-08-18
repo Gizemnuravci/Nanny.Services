@@ -98,3 +98,27 @@
 .switchBtn:hover {
   color: #059669;
 }
+
+.inputError {
+  border-color: #ef4444 !important;
+}
+
+.errorText {
+  color: #ef4444;
+  font-size: 12px;
+  margin-top: -12px;
+  margin-bottom: 2px;
+  text-align: left;
+  padding-left: 4px;
+}
+
+.globalError {
+  color: #ef4444;
+  background-color: #fef2f2;
+  border: 1px solid #fee2e2;
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 8px;
+}
