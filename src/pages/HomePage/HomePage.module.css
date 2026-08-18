@@ -98,13 +98,32 @@
 .rightContent {
   flex: 1;
   position: relative;
-  background:
-    linear-gradient(180deg, rgba(0, 0, 0, 0.18) 0%, rgba(0, 0, 0, 0.08) 100%),
-    url("../../assets/baby.jpg") center/cover no-repeat;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.18) 0%,
+    rgba(0, 0, 0, 0.08) 100%
+  );
   padding: 42px 54px 32px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  overflow: hidden;
+}
+
+.heroImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.navHeader,
+.statisticsCard {
+  position: relative;
+  z-index: 10;
 }
 
 .navHeader {

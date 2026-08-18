@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { FiArrowUpRight, FiCheck } from 'react-icons/fi';
+import babyImage from '../../assets/baby.jpg';
 import styles from "./HomePage.module.css";
 
 const HomePage = ({ onOpenAuth = () => {} }) => {
@@ -34,6 +35,12 @@ const HomePage = ({ onOpenAuth = () => {} }) => {
         </div>
 
         <div className={styles.rightContent}>
+          <img 
+            src={babyImage}
+            alt="Happy baby with toys"
+            className={styles.heroImage}
+          />
+          
           <nav className={styles.navHeader} aria-label="Main Navigation">
             <div className={styles.navLinks}>
               <button
