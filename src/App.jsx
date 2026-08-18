@@ -1,5 +1,5 @@
-import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
-import { useMemo, useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { onAuthStateChanged } from "firebase/auth";
 
@@ -23,6 +23,9 @@ import babysitters from "./data/babysitters.json";
 
 import { setUser, clearUser } from "./redux/auth/authSlice";
 import { setNannies, setFavorites, toggleFavorite } from "./redux/nannies/nanniesSlice";
+
+// BASE_URL örn: "/Nanny.Services/" → sondaki "/" kaldırılır → "/Nanny.Services"
+const basename = import.meta.env.BASE_URL.replace(/\/$/, "") || "/";
 
 export default function App() {
   const dispatch = useDispatch();
@@ -57,7 +60,6 @@ export default function App() {
             displayName: currentUser.displayName,
           })
         );
-        // Load favorites for this user
         try {
           const userFavs = await fetchFavoritesFromDB(currentUser.uid);
           dispatch(setFavorites(userFavs));
@@ -88,7 +90,6 @@ export default function App() {
     }
 
     const isFav = favorites.some((item) => item.name === nanny.name);
-    // Optimistically update Redux store
     dispatch(toggleFavorite(nanny));
 
     try {
@@ -99,39 +100,38 @@ export default function App() {
       }
     } catch (error) {
       console.error("Failed to sync favorite with database:", error);
-      // Revert if database sync fails
       dispatch(toggleFavorite(nanny));
     }
   };
 
-  const router = useMemo(
-    () =>
-      createBrowserRouter(
-        [
-          {
-            path: "/",
-            element: <HomePage onOpenAuth={setAuthModalMode} />,
-          },
-          {
-            path: "/nannies",
-            element: (
-              <>
-                <Header
-                  user={user}
-                  onOpenAuthModal={setAuthModalMode}
-                  onLogout={handleLogout}
-                />
-                <NanniesPage
-                  nannies={nannies}
-                  favorites={favorites}
-                  onToggleFavorite={handleToggleFavorite}
-                />
-              </>
-            ),
-          },
-          {
-            path: "/favorites",
-            element: user ? (
+  return (
+    <BrowserRouter basename={basename}>
+      <Routes>
+        <Route
+          path="/"
+          element={<HomePage onOpenAuth={setAuthModalMode} />}
+        />
+        <Route
+          path="/nannies"
+          element={
+            <>
+              <Header
+                user={user}
+                onOpenAuthModal={setAuthModalMode}
+                onLogout={handleLogout}
+              />
+              <NanniesPage
+                nannies={nannies}
+                favorites={favorites}
+                onToggleFavorite={handleToggleFavorite}
+              />
+            </>
+          }
+        />
+        <Route
+          path="/favorites"
+          element={
+            user ? (
               <>
                 <Header
                   user={user}
@@ -145,17 +145,11 @@ export default function App() {
               </>
             ) : (
               <Navigate to="/" replace />
-            ),
-          },
-        ],
-        { basename: import.meta.env.BASE_URL }
-      ),
-    [user, favorites, nannies]
-  );
+            )
+          }
+        />
+      </Routes>
 
-  return (
-    <>
-      <RouterProvider router={router} />
       {authModalMode && authModalMode !== "unauthorized" && (
         <AuthModal
           mode={authModalMode}
@@ -169,6 +163,6 @@ export default function App() {
           onOpenLogin={() => setAuthModalMode("login")}
         />
       )}
-    </>
+    </BrowserRouter>
   );
 }
