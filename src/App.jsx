@@ -18,31 +18,34 @@ export default function App() {
 
   const router = useMemo(
     () =>
-      createBrowserRouter([
-        {
-          path: "/",
-          element: <HomePage onOpenAuth={() => {}} />,
-        },
-        {
-          path: "/nannies",
-          element: (
-            <NanniesPage
-              nannies={babysitters}
-              favorites={favorites}
-              onToggleFavorite={toggleFavorite}
-            />
-          ),
-        },
-        {
-          path: "/favorites",
-          element: (
-            <FavoritePage
-              favorites={favorites}
-              onToggleFavorite={toggleFavorite}
-            />
-          ),
-        },
-      ]),
+      createBrowserRouter(
+        [
+          {
+            path: "/",
+            element: <HomePage onOpenAuth={() => {}} />,
+          },
+          {
+            path: "/nannies",
+            element: (
+              <NanniesPage
+                nannies={babysitters}
+                favorites={favorites}
+                onToggleFavorite={toggleFavorite}
+              />
+            ),
+          },
+          {
+            path: "/favorites",
+            element: (
+              <FavoritePage
+                favorites={favorites}
+                onToggleFavorite={toggleFavorite}
+              />
+            ),
+          },
+        ],
+        { basename: import.meta.env.BASE_URL }
+      ),
     [favorites]
   );
 
