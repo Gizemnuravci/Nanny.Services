@@ -1,7 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { authReducer } from "./auth/authSlice";
 import { nanniesReducer } from "./nannies/nanniesSlice";
-import storage from "redux-persist/lib/storage";
 import {
   persistStore,
   persistReducer,
@@ -12,6 +11,15 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
+
+// Vite 8 / rolldown ile redux-persist/lib/storage uyumsuz olduğu için
+// localStorage'ı doğrudan saran custom storage kullanıyoruz
+const storage = {
+  getItem: (key) => Promise.resolve(localStorage.getItem(key)),
+  setItem: (key, value) => Promise.resolve(localStorage.setItem(key, value)),
+  removeItem: (key) => Promise.resolve(localStorage.removeItem(key)),
+};
+
 
 const persistConfig = {
   key: "root",
