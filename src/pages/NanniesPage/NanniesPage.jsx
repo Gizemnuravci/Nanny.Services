@@ -1,7 +1,6 @@
 import { useState } from "react";
 import NannyCard from "../../components/NannyCard/NannyCard";
 import AppointmentModal from "../../components/Modals/AppointmentModal/AppointmentModal";
-import { fetchNanniesFromDB } from "../../firebase/services";
 import styles from "./NanniesPage.module.css";
 
 export default function NanniesPage({
@@ -16,14 +15,14 @@ export default function NanniesPage({
   const getFilteredNannies = () => {
     let result = [...nannies];
 
-    // Filter by price (less or greater than 18)
+   
     if (filter === "less-18") {
       result = result.filter((item) => item.price_per_hour <= 18);
     } else if (filter === "greater-18") {
       result = result.filter((item) => item.price_per_hour > 18);
     }
 
-    // Sort accordingly
+   
     switch (filter) {
       case "a-z":
         return result.sort((a, b) => a.name.localeCompare(b.name));
@@ -34,7 +33,6 @@ export default function NanniesPage({
       case "not-popular":
         return result.sort((a, b) => a.rating - b.rating);
       default:
-        // Default sort for filtered results by price
         if (filter === "less-18" || filter === "greater-18") {
           return result.sort((a, b) => a.price_per_hour - b.price_per_hour);
         }
@@ -45,14 +43,8 @@ export default function NanniesPage({
   const filteredNannies = getFilteredNannies();
   const visibleNannies = filteredNannies.slice(0, visibleCount);
 
-  const handleLoadMore = async () => {
-    try {
-      // Trigger a new database request
-      await fetchNanniesFromDB();
-      setVisibleCount((prev) => prev + 3);
-    } catch (error) {
-      console.error("Failed to load more nannies from DB:", error);
-    }
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => prev + 3);
   };
 
   return (
