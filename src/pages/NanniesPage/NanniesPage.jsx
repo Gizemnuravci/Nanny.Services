@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import NannyCard from "../../components/NannyCard/NannyCard";
 import AppointmentModal from "../../components/Modals/AppointmentModal/AppointmentModal";
 import styles from "./NanniesPage.module.css";
@@ -12,35 +12,31 @@ export default function NanniesPage({
   const [visibleCount, setVisibleCount] = useState(3);
   const [selectedNanny, setSelectedNanny] = useState(null);
 
-  const getFilteredNannies = () => {
+  // Filtreleme ve sıralama işlemini useMemo ile optimize ediyoruz
+  const filteredNannies = useMemo(() => {
     let result = [...nannies];
 
-   
     if (filter === "less-18") {
       result = result.filter((item) => item.price_per_hour <= 18);
     } else if (filter === "greater-18") {
       result = result.filter((item) => item.price_per_hour > 18);
     }
 
-   
     switch (filter) {
       case "a-z":
-        return result.sort((a, b) => a.name.localeCompare(b.name));
+        return result.sort((a, b) => (a.name || "").localeCompare(b.name || ""));
       case "z-a":
-        return result.sort((a, b) => b.name.localeCompare(a.name));
+        return result.sort((a, b) => (b.name || "").localeCompare(a.name || ""));
       case "popular":
-        return result.sort((a, b) => b.rating - a.rating);
+        return result.sort((a, b) => (b.rating || 0) - (a.rating || 0));
       case "not-popular":
-        return result.sort((a, b) => a.rating - b.rating);
+        return result.sort((a, b) => (a.rating || 0) - (b.rating || 0));
       default:
-        if (filter === "less-18" || filter === "greater-18") {
-          return result.sort((a, b) => a.price_per_hour - b.price_per_hour);
-        }
         return result;
     }
-  };
+  }, [nannies, filter]);
 
-  const filteredNannies = getFilteredNannies();
+  // Ekranda gösterilecek kadar elemanı kesiyoruz
   const visibleNannies = filteredNannies.slice(0, visibleCount);
 
   const handleLoadMore = () => {
@@ -75,9 +71,9 @@ export default function NanniesPage({
 
         <section className={styles.nannyList}>
           {visibleNannies.length > 0 ? (
-            visibleNannies.map((nanny) => (
+            visibleNannies.map((nanny, index) => (
               <NannyCard
-                key={nanny.name}
+                key={nanny.id || nanny.name || index}
                 nanny={nanny}
                 isFavorite={favorites.some((item) => item.name === nanny.name)}
                 onToggleFavorite={() => onToggleFavorite(nanny)}
