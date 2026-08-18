@@ -29,6 +29,8 @@
   flex-direction: column;
   justify-content: flex-start;
   color: #fff;
+  position: relative;
+  z-index: 10;
 }
 
 .brandHeader {
@@ -95,6 +97,20 @@
   transform: translate(2px, -2px);
 }
 
+.heroCard {
+  position: relative;
+}
+
+.heroImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
 .rightContent {
   flex: 1.65;
   position: relative;
@@ -108,16 +124,7 @@
   flex-direction: column;
   justify-content: space-between;
   overflow: hidden;
-}
-
-.heroImage {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 0;
+  z-index: 10;
 }
 
 .navHeader,

@@ -16,6 +16,9 @@ const HomePage = ({ onOpenAuth = () => {} }) => {
 
           <div className={styles.mainText}>
             <h1 className={styles.title}>
+              <svg width="24" height="24" viewBox="0 0 36 32" style={{display: 'inline', marginRight: '8px', verticalAlign: 'middle'}}>
+                <use xlinkHref="#icon-Vector-7" />
+              </svg>
               Make Life Easier
               <br />
               for the Family:
@@ -34,13 +37,13 @@ const HomePage = ({ onOpenAuth = () => {} }) => {
           </div>
         </div>
 
+        <img 
+          src={babyImage}
+          alt="Happy baby with toys"
+          className={styles.heroImage}
+        />
+
         <div className={styles.rightContent}>
-          <img 
-            src={babyImage}
-            alt="Happy baby with toys"
-            className={styles.heroImage}
-          />
-          
           <nav className={styles.navHeader} aria-label="Main Navigation">
             <div className={styles.navLinks}>
               <button

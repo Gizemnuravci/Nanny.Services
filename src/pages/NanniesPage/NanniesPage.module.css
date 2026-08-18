@@ -57,6 +57,9 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .emptyState {
