@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 import styles from './AuthModal.module.css';
 
 
-const AuthModal = ({ mode, onClose, onSwitchMode }) => {
+const AuthModal = ({ mode, onClose, onSwitchMode, onSubmit = () => {} }) => {
   const isRegister = mode === 'register';
 
   const formik = useFormik({
@@ -15,12 +15,14 @@ const AuthModal = ({ mode, onClose, onSwitchMode }) => {
     validationSchema: Yup.object({
       name: isRegister ? Yup.string().required('Required') : Yup.string(),
       email: Yup.string().email('Invalid email').required('Required'),
-      password: Yup.string().min(6, 'At least 6 characters').required('Reguired'),
-
+      password: Yup.string().min(6, 'At least 6 characters').required('Required'),
     }),
     onSubmit: (values) => {
-      console.log('Auth Data:', values);
-      onClose();
+      if (isRegister) {
+        onSubmit(values.name, values.email, values.password);
+      } else {
+        onSubmit(values.email, values.password);
+      }
     },
   });
 
