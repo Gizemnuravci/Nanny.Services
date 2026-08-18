@@ -58,7 +58,7 @@
 }
 
 .submitBtn {
-  background-color: #103931;
+  background-color: #10b981;
   color: #fff;
   border: none;
   border-radius: 30px;
@@ -67,6 +67,11 @@
   font-weight: 500;
   cursor: pointer;
   margin-top: 22px;
+  transition: all 0.3s ease;
+}
+
+.submitBtn:hover {
+  background-color: #059669;
 }
 
 .switchWrapper {
@@ -82,7 +87,7 @@
 .switchBtn {
   background: transparent;
   border: none;
-  color: #103931;
+  color: #10b981;
   font-weight: 600;
   text-decoration: underline;
   cursor: pointer;
@@ -91,5 +96,5 @@
 }
 
 .switchBtn:hover {
-  color: #0d2e27;
+  color: #059669;
 }

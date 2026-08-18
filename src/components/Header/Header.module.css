@@ -46,7 +46,7 @@
   transform: translateX(-50%);
   width: 8px;
   height: 8px;
-  background-color: #103931;
+  background-color: #10b981;
   border-radius: 50%;
 }
 
@@ -69,22 +69,23 @@
 }
 
 .loginBtn:hover {
-  border-color: #11101c;
+  border-color: #10b981;
+  color: #10b981;
 }
 
 .registerBtn {
-  background-color: #103931;
+  background-color: #10b981;
   border: none;
   color: #fff;
   padding: 14px 40px;
   font-size: 16px;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .registerBtn:hover {
-  background-color: #0d2e27;
+  background-color: #059669;
 }
 
 .userMenu {
@@ -100,9 +101,16 @@
 
 .logoutBtn {
   background: transparent;
-  border: 1px solid #103931;
-  color: #103931;
+  border: 1px solid #10b981;
+  color: #10b981;
   padding: 10px 20px;
   border-radius: 30px;
   cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logoutBtn:hover {
+  background-color: rgba(16, 185, 129, 0.1);
+  border-color: #059669;
+  color: #059669;
 }

@@ -5,7 +5,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #dfe5e8;
+  background-color: #f0fdf4;
   box-sizing: border-box;
 }
 
@@ -17,13 +17,13 @@
   display: flex;
   overflow: hidden;
   position: relative;
-  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.8);
-  background: #103931;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3);
+  background: #065f46;
 }
 
 .leftContent {
   flex: 1.02;
-  background-color: #103931;
+  background-color: #065f46;
   padding: 32px 36px 44px 36px;
   display: flex;
   flex-direction: column;
@@ -41,7 +41,7 @@
   font-size: 24px;
   font-weight: 700;
   letter-spacing: -0.03em;
-  color: #f8f8f8;
+  color: #f0fdf4;
 }
 
 .mainText {
@@ -61,7 +61,7 @@
   font-size: 24px;
   line-height: 1.4;
   letter-spacing: -0.02em;
-  color: rgba(255, 255, 255, 0.86);
+  color: rgba(255, 255, 255, 0.92);
   margin: 0 0 44px 0;
   max-width: 520px;
 }
@@ -72,9 +72,9 @@
   justify-content: center;
   gap: 12px;
   padding: 18px 32px;
-  background: transparent;
+  background: #10b981;
   color: #fff;
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  border: 1px solid #10b981;
   border-radius: 999px;
   font-size: 18px;
   font-weight: 500;
@@ -83,8 +83,8 @@
 }
 
 .getStartedBtn:hover {
-  background-color: rgba(255, 255, 255, 0.12);
-  border-color: #fff;
+  background-color: #059669;
+  border-color: #059669;
 }
 
 .arrowIcon {
@@ -179,18 +179,28 @@
   font-weight: 500;
   padding: 12px 20px;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .loginBtn {
-  background: rgba(255, 255, 255, 0.22);
-  border: 1px solid rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.4);
   color: #fff;
 }
 
+.loginBtn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
 .registerBtn {
-  background-color: rgba(16, 57, 49, 0.92);
+  background-color: #10b981;
   border: none;
   color: #fff;
+}
+
+.registerBtn:hover {
+  background-color: #059669;
 }
 
 .statisticsCard {
@@ -208,7 +218,7 @@
   width: 42px;
   height: 42px;
   border-radius: 12px;
-  background-color: #103931;
+  background-color: #10b981;
   display: flex;
   align-items: center;
   justify-content: center;
