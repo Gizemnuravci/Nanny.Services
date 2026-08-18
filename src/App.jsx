@@ -104,21 +104,16 @@ function NanniesPage() {
   );
 }
 
-const router = createBrowserRouter(
-  [
-    {
-      path: "/",
-      element: <NanniesPage />,
-    },
-    {
-      path: "/nannies",
-      element: <NanniesPage />,
-    },
-  ],
+const router = createBrowserRouter([
   {
-    basename: import.meta.env.BASE_URL,
-  }
-);
+    path: "/",
+    element: <NanniesPage />,
+  },
+  {
+    path: "/nannies",
+    element: <NanniesPage />,
+  },
+]);
 
 export default function App() {
   return <RouterProvider router={router} />;
