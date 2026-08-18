@@ -22,25 +22,36 @@ export default function App() {
         [
           {
             path: "/",
-            element: <HomePage onOpenAuth={() => {}} />,
+            element: (
+              <>
+                <Header user={null} onOpenAuthModal={() => {}} onLogout={() => {}} />
+                <HomePage onOpenAuth={() => {}} />
+              </>
+            ),
           },
           {
             path: "/nannies",
             element: (
-              <NanniesPage
-                nannies={babysitters}
-                favorites={favorites}
-                onToggleFavorite={toggleFavorite}
-              />
+              <>
+                <Header user={null} onOpenAuthModal={() => {}} onLogout={() => {}} />
+                <NanniesPage
+                  nannies={babysitters}
+                  favorites={favorites}
+                  onToggleFavorite={toggleFavorite}
+                />
+              </>
             ),
           },
           {
             path: "/favorites",
             element: (
-              <FavoritePage
-                favorites={favorites}
-                onToggleFavorite={toggleFavorite}
-              />
+              <>
+                <Header user={null} onOpenAuthModal={() => {}} onLogout={() => {}} />
+                <FavoritePage
+                  favorites={favorites}
+                  onToggleFavorite={toggleFavorite}
+                />
+              </>
             ),
           },
         ],
@@ -49,10 +60,5 @@ export default function App() {
     [favorites]
   );
 
-  return (
-    <>
-      <Header user={null} onOpenAuthModal={() => {}} onLogout={() => {}} />
-      <RouterProvider router={router} />
-    </>
-  );
+  return <RouterProvider router={router} />;
 }
