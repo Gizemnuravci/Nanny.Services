@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import styles from "./AppointmentModal.module.css";
 
 const appointmentSchema = yup.object().shape({
   address: yup.string().required("Address is required"),
@@ -37,11 +36,13 @@ export default function AppointmentModal({ nanny, onClose }) {
 
   if (!nanny) return null;
 
+
   const onSubmit = (data) => {
     console.log("Form Data Submitted:", data);
     alert(`Appointment submitted successfully for ${nanny.name}!`);
     onClose();
   };
+
 
   const onError = (formErrors) => {
     console.log("Validation Errors:", formErrors);
@@ -50,150 +51,152 @@ export default function AppointmentModal({ nanny, onClose }) {
   return (
     <div
       onClick={onClose}
-      className={styles.backdrop}
+      className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4"
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className={styles.modal}
+        className="bg-white rounded-3xl p-8 max-w-lg w-full relative shadow-xl"
       >
         <button
           onClick={onClose}
           type="button"
-          className={styles.closeBtn}
+          className="absolute top-6 right-6 text-2xl text-gray-400 hover:text-gray-600"
         >
           ✕
         </button>
 
-        <h2 className={styles.title}>
+        <h2 className="text-2xl font-bold mb-1 text-gray-900">
           Make an appointment with a nanny
         </h2>
-        <p className={styles.subtitle}>
+        <p className="text-gray-500 text-sm mb-4">
           Arranging a meeting with{" "}
-          <strong>{nanny?.name}</strong>
+          <strong className="text-gray-800">{nanny?.name}</strong>
         </p>
 
         {nanny?.avatar_url && (
-          <div className={styles.nannyInfo}>
+          <div className="flex items-center gap-3 mb-5">
             <img
               src={nanny.avatar_url}
               alt={nanny.name}
-              className={styles.nannyAvatar}
+              className="w-11 h-11 rounded-xl object-cover"
             />
-            <div className={styles.nannyName}>
-              <p className={styles.nannyLabel}>Your nanny</p>
-              <p className={styles.nannyNameText}>
+            <div>
+              <p className="text-xs text-gray-400">Your nanny</p>
+              <p className="text-sm font-semibold text-gray-800">
                 {nanny.name}
               </p>
             </div>
           </div>
         )}
 
-        <form onSubmit={handleSubmit(onSubmit, onError)} className={styles.form}>
-          <div className={styles.twoColumnRow}>
-            <div className={styles.formGroup}>
+     
+        <form onSubmit={handleSubmit(onSubmit, onError)} className="space-y-3">
+          <div className="grid grid-cols-2 gap-3">
+            <div>
               <input
                 {...register("address")}
                 placeholder="Address"
-                className={`${styles.input} ${errors.address ? styles.error : ""}`}
+                className={`w-full p-3 border rounded-xl text-sm ${
+                  errors.address ? "border-red-500" : "border-gray-300"
+                }`}
               />
               {errors.address && (
-                <p className={styles.errorMessage}>
+                <p className="text-red-500 text-xs mt-1">
                   {errors.address.message}
                 </p>
               )}
             </div>
-            <div className={styles.formGroup}>
+            <div>
               <input
                 {...register("phone")}
                 placeholder="+380"
-                className={`${styles.input} ${errors.phone ? styles.error : ""}`}
+                className={`w-full p-3 border rounded-xl text-sm ${
+                  errors.phone ? "border-red-500" : "border-gray-300"
+                }`}
               />
               {errors.phone && (
-                <p className={styles.errorMessage}>
+                <p className="text-red-500 text-xs mt-1">
                   {errors.phone.message}
                 </p>
               )}
             </div>
           </div>
 
-          <div className={styles.twoColumnRow}>
-            <div className={styles.formGroup}>
+          <div className="grid grid-cols-2 gap-3">
+            <div>
               <input
                 {...register("childAge")}
                 placeholder="Child's age"
-                className={`${styles.input} ${errors.childAge ? styles.error : ""}`}
+                className={`w-full p-3 border rounded-xl text-sm ${
+                  errors.childAge ? "border-red-500" : "border-gray-300"
+                }`}
               />
               {errors.childAge && (
-                <p className={styles.errorMessage}>
+                <p className="text-red-500 text-xs mt-1">
                   {errors.childAge.message}
                 </p>
               )}
             </div>
-            <div className={styles.formGroup}>
+            <div>
               <input
                 type="time"
                 {...register("time")}
-                className={`${styles.input} ${errors.time ? styles.error : ""}`}
+                className={`w-full p-3 border rounded-xl text-sm ${
+                  errors.time ? "border-red-500" : "border-gray-300"
+                }`}
               />
               {errors.time && (
-                <p className={styles.errorMessage}>
+                <p className="text-red-500 text-xs mt-1">
                   {errors.time.message}
                 </p>
               )}
             </div>
           </div>
 
-          <div className={styles.formGroup}>
+          <div>
             <input
               {...register("email")}
               placeholder="Email"
-              className={`${styles.input} ${errors.email ? styles.error : ""}`}
+              className={`w-full p-3 border rounded-xl text-sm ${
+                errors.email ? "border-red-500" : "border-gray-300"
+              }`}
             />
             {errors.email && (
-              <p className={styles.errorMessage}>
+              <p className="text-red-500 text-xs mt-1">
                 {errors.email.message}
               </p>
             )}
           </div>
 
-          <div className={styles.formGroup}>
+          <div>
             <input
               {...register("parentName")}
               placeholder="Father's or mother's name"
-              className={`${styles.input} ${errors.parentName ? styles.error : ""}`}
+              className={`w-full p-3 border rounded-xl text-sm ${
+                errors.parentName ? "border-red-500" : "border-gray-300"
+              }`}
             />
             {errors.parentName && (
-              <p className={styles.errorMessage}>
+              <p className="text-red-500 text-xs mt-1">
                 {errors.parentName.message}
               </p>
             )}
           </div>
 
-          <div className={styles.formGroup}>
+          <div>
             <textarea
               {...register("comment")}
               rows={3}
               placeholder="Comment"
-              className={`${styles.textarea} ${errors.comment ? styles.error : ""}`}
+              className={`w-full p-3 border rounded-xl text-sm resize-none ${
+                errors.comment ? "border-red-500" : "border-gray-300"
+              }`}
             />
             {errors.comment && (
-              <p className={styles.errorMessage}>
+              <p className="text-red-500 text-xs mt-1">
                 {errors.comment.message}
               </p>
             )}
-          </div>
-
-          <button
-            type="submit"
-            className={styles.submitBtn}
-          >
-            Send
-          </button>
-        </form>
-      </div>
-    </div>
-  );
-}
           </div>
 
           <button
