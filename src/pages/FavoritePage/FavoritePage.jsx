@@ -2,9 +2,9 @@ import { useSelector } from "react-redux";
 import NannyCard from '../../components/NannyCard/NannyCard';
 import styles from './FavoritePage.module.css';
 
-const FavoritesPage = () => {
- 
-  const favorites = useSelector((state) => state.nannies.favorites);
+const FavoritesPage = ({ favorites: favoritesProp, onToggleFavorite }) => {
+  const reduxFavorites = useSelector((state) => state.nannies?.favorites || []);
+  const favorites = favoritesProp ?? reduxFavorites;
 
   return (
     <section className={styles.favoritesSection}>
@@ -12,7 +12,12 @@ const FavoritesPage = () => {
         {favorites.length > 0 ? (
           <div className={styles.cardList}>
             {favorites.map((nanny) => (
-              <NannyCard key={nanny.name} nanny={nanny} />
+              <NannyCard
+                key={nanny.name}
+                nanny={nanny}
+                isFavorite={true}
+                onToggleFavorite={() => onToggleFavorite?.(nanny)}
+              />
             ))}
           </div>
         ) : (

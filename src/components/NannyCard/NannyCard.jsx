@@ -82,25 +82,24 @@ export default function NannyCard({ nanny, onBookClick, isFavorite, onToggleFavo
               </span>
             </div>
 
-        
-            <button
-              type="button"
-              onClick={onToggleFavorite}
-              className={`${styles.favoriteBtn} ${isFavorite ? styles.favoriteActive : ""}`}
-              aria-label="Add to favorites"
-            >
-              <svg
-                className={styles.iconHeart}
-                viewBox="0 0 24 24"
-                fill={isFavorite ? "#047857" : "none"}
-                stroke={isFavorite ? "#047857" : "#111827"}
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+            <div className={styles.cardActions}>
+              <button type="button" className={styles.userBtn} aria-label="User profile">
+                <svg className={styles.iconUser} aria-hidden="true">
+                  <use href={`${base}symbol-defs.svg#icon-mdi_user`} />
+                </svg>
+              </button>
+
+              <button
+                type="button"
+                onClick={onToggleFavorite}
+                className={`${styles.favoriteBtn} ${isFavorite ? styles.favoriteActive : ""}`}
+                aria-label="Add to favorites"
               >
-                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.78-8.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-              </svg>
-            </button>
+                <svg className={styles.iconHeart} aria-hidden="true">
+                  <use href={`${base}symbol-defs.svg#icon-Vector-7`} />
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
 

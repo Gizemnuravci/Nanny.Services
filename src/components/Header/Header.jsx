@@ -1,7 +1,11 @@
 import { NavLink, Link } from 'react-router-dom';
 import styles from './Header.module.css';
 
-const Header = ({ onOpenAuthModal, user, onLogout }) => {
+const Header = ({
+  onOpenAuthModal = () => {},
+  user,
+  onLogout = () => {},
+}) => {
   return (
     <header className={styles.header}>
       <div className={styles.container}>

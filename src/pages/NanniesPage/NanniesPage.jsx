@@ -1,9 +1,13 @@
 import { useState } from "react";
-import NannyCard from "../components/NannyCard/NannyCard";
-import AppointmentModal from "../components/AppointmentModal/AppointmentModal";
+import NannyCard from "../../components/NannyCard/NannyCard";
+import AppointmentModal from "../../components/Modals/AppointmentModal/AppointmentModal";
 import styles from "./NanniesPage.module.css";
 
-export default function NanniesPage({ nannies = [] }) {
+export default function NanniesPage({
+  nannies = [],
+  favorites = [],
+  onToggleFavorite = () => {},
+}) {
   const [filter, setFilter] = useState("all");
   const [visibleCount, setVisibleCount] = useState(3);
   const [selectedNanny, setSelectedNanny] = useState(null);
@@ -65,6 +69,8 @@ export default function NanniesPage({ nannies = [] }) {
               <NannyCard
                 key={nanny.id || nanny.name}
                 nanny={nanny}
+                isFavorite={favorites.some((item) => item.name === nanny.name)}
+                onToggleFavorite={() => onToggleFavorite(nanny)}
                 onBookClick={() => setSelectedNanny(nanny)}
               />
             ))

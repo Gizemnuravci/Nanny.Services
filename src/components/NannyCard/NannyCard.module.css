@@ -87,14 +87,54 @@
 
 .headerRight {
   display: flex;
-  align-items: center;
-  gap: 12px;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
   margin-left: auto;
+}
+
+.cardActions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.userBtn,
+.favoriteBtn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(17, 24, 39, 0.12);
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.userBtn:hover,
+.favoriteBtn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(16, 185, 129, 0.35);
+  box-shadow: 0 6px 12px rgba(16, 185, 129, 0.08);
+}
+
+.iconUser {
+  width: 14px;
+  height: 14px;
+  fill: #111827;
 }
 
 .metaInfo {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   flex-wrap: wrap;
   gap: 6px 10px;
   font-size: 12px;
@@ -139,23 +179,43 @@
 }
 
 .favoriteBtn {
-  background: none;
-  border: none;
+  background-color: #ffffff;
+  border: 1px solid rgba(17, 24, 39, 0.12);
   cursor: pointer;
   padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .favoriteBtn:hover {
-  transform: scale(1.1);
+  transform: translateY(-1px);
+  border-color: rgba(16, 185, 129, 0.35);
+  box-shadow: 0 6px 12px rgba(16, 185, 129, 0.08);
+}
+
+.favoriteActive {
+  background-color: rgba(16, 185, 129, 0.08);
+  border-color: rgba(16, 185, 129, 0.5);
 }
 
 .iconHeart {
-  width: 26px;
-  height: 26px;
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: #111827;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.favoriteActive .iconHeart {
+  fill: #10b981;
+  stroke: #10b981;
 }
 
 .detailsGrid {
