@@ -35,18 +35,24 @@ export default function App() {
 
   const [authModalMode, setAuthModalMode] = useState(null);
 
-  // 1. Seed database and fetch initial nannies
+  // 1. Önce lokal veriyi anında yükle, sonra Firebase'den güncellemeyi dene
   useEffect(() => {
-    const initializeData = async () => {
+    // Anında lokal veriyi göster
+    dispatch(setNannies(babysitters));
+
+    // Arka planda Firebase'den güncellemeyi dene
+    const syncWithFirebase = async () => {
       try {
         await checkAndSeedDatabase(babysitters);
         const data = await fetchNanniesFromDB();
-        dispatch(setNannies(data));
+        if (data && data.length > 0) {
+          dispatch(setNannies(data));
+        }
       } catch (error) {
-        console.error("Failed to initialize database or fetch nannies:", error);
+        console.error("Firebase sync failed, using local data:", error);
       }
     };
-    initializeData();
+    syncWithFirebase();
   }, [dispatch]);
 
   // 2. Listen to Auth State changes
