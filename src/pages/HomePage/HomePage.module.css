@@ -1,0 +1,322 @@
+.pageWrapper {
+  width: 100%;
+  min-height: 100vh;
+  padding: 32px 128px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f3f3f3;
+  box-sizing: border-box;
+}
+
+.heroCard {
+  width: 100%;
+  max-width: 1376px;
+  min-height: 736px;
+  border-radius: 30px;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+}
+
+.leftContent {
+  flex: 1;
+  background-color: #103931;
+  padding: 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #fff;
+}
+
+.brandHeader {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.maintext {
+  margin-top: 40px;
+  margin-bottom: 24px;
+}
+
+.title {
+  font-size: 70px;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 28px;
+  color: #fff;
+}
+
+.subtitle {
+  font-size: 28px;
+  line-height: 1.07;
+  letter-spacing: -0.02em;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 64px;
+  max-width: 517px;
+}
+
+.getStartedBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  padding: 18px 50px;
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 30px;
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.getStartedBtn:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: #fff;
+}
+
+.arrowIcon {
+  transition: transform 0.2s ease;
+}
+
+.getStartedBtn:hover .arrowIcon {
+  transform: translate(2px, -2px);
+}
+
+.rightContent {
+  flex: 1;
+  position: relative;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 40%),
+    url("../../assets/baby.jpg") center/cover no-repeat;
+  padding: 32px 64px 50px 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.navHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 20px;
+}
+
+.navLinks {
+  display: flex;
+  gap: 40px;
+}
+
+.navBtn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 400;
+  cursor: pointer;
+  position: relative;
+  padding: 4px 0;
+}
+
+.activeLink::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 8px;
+  background-color: #107c41;
+  border-radius: 50%;
+}
+
+.authButtons {
+  display: flex;
+  gap: 16px;
+}
+
+.loginBtn {
+  padding: 14px 39px;
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.loginBtn:hover {
+  border-color: #fff;
+}
+
+.registerBtn {
+  padding: 14px 40px;
+  background-color: #103931;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.registerBtn:hover {
+  background-color: #107c41;
+}
+
+.statisticsCard {
+  align-self: flex-end;
+  background-color: #fff;
+  border-radius: 20px;
+  padding: 32px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+.checkIconWrapper {
+  width: 54px;
+  height: 54px;
+  border-radius: 13px;
+  background-color: #103931;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.staTitle {
+  font-size: 14px;
+  color: rgba(17, 17, 17, 0.5);
+  margin-bottom: 6px;
+}
+
+.staCount {
+  font-size: 24px;
+  font-weight: 700;
+  color: #11101c;
+}
+
+@media (max-width: 1280px) {
+  .pageWrapper {
+    padding: 24px 32px;
+  }
+
+  .leftContent {
+    padding: 48px;
+  }
+
+  .rightContent {
+    padding: 32px 40px;
+  }
+
+  .title {
+    font-size: 54px;
+  }
+
+  .subtitle {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 1023px) {
+  .pageWrapper {
+    padding: 16px;
+  }
+
+  .heroCard {
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  .leftContent {
+    padding: 40px 32px;
+  }
+
+  .rightContent {
+    min-height: 480px;
+    padding: 32px;
+  }
+
+  .title {
+    font-size: 48px;
+  }
+
+  .subtitle {
+    font-size: 20px;
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 767px) {
+  .pageWrapper {
+    padding: 0;
+  }
+  .heroCard {
+    border-radius: 0;
+  }
+  .leftContent {
+    padding: 32px 20px;
+  }
+
+  .rightContent {
+    padding: 24px 20px 32px 20px;
+    min-height: 420px;
+  }
+
+  .title {
+    font-size: 36px;
+    line-height: 1.1;
+  }
+
+  .subtitle {
+    font-size: 16px;
+    margin-bottom: 32px;
+  }
+
+  .getStartedBtn {
+    padding: 14px 28px;
+    font-size: 16px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .navHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .authButtons {
+    width: 100%;
+  }
+
+  .loginBtn,
+  .registerBtn {
+    flex: 1;
+    padding: 12px 16px;
+    text-align: center;
+    font-size: 14px;
+  }
+  .statisticsCard {
+    align-self: center;
+    width: 100%;
+    padding: 20px;
+  }
+  .staCount {
+    font-size: 20px;
+  }
+}

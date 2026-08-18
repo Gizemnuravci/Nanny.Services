@@ -1,0 +1,94 @@
+.mainContainer {
+  min-height: 100vh;
+  background-color: #f8f8f8;
+  padding: 32px 16px;
+}
+
+@media (min-width: 640px) {
+  .mainContainer {
+    padding: 32px 32px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .mainContainer {
+    padding: 32px 64px;
+  }
+}
+
+.contentWrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.filterSection {
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.filterLabel {
+  font-size: 12px;
+  font-weight: 500;
+  color: #8e8e93;
+}
+
+.filterSelect {
+  background-color: #ffffff;
+  border: none;
+  border-radius: 16px;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  outline: none;
+  transition: box-shadow 0.2s ease;
+}
+
+.filterSelect:focus {
+  outline: 2px solid #047857;
+}
+
+.nannyList {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.emptyState {
+  background-color: #ffffff;
+  border-radius: 24px;
+  padding: 32px;
+  text-align: center;
+  color: #6b7280;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.loadMoreContainer {
+  margin-top: 48px;
+  text-align: center;
+}
+
+.loadMoreBtn {
+  padding: 14px 40px;
+  background-color: #047857;
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 14px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition:
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.loadMoreBtn:hover {
+  background-color: #065f46;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}

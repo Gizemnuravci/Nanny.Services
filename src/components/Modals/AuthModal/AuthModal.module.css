@@ -1,0 +1,95 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vm;
+  height: 100vh;
+  background-color: rgba(17, 16, 28, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: #fff;
+  border-radius: 30px;
+  padding: 64px;
+  width: 566px;
+  position: relative;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.title {
+  font-size: 40px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  color: #11101c;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: rgba(17, 16, 28, 0.6);
+  margin-bottom: 40px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form input {
+  width: 100%;
+  padding: 16px 18px;
+  border: 1px solid rgba(17, 16, 28, 0.1);
+  border-radius: 12px;
+  font-size: 16px;
+  outline: none;
+}
+
+.submitBtn {
+  background-color: #103931;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  padding: 16px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 22px;
+}
+
+.switchWrapper {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 14px;
+  color: rgba(17, 16, 28, 0.6);
+}
+
+.switchBtn {
+  background: transparent;
+  border: none;
+  color: #103931;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+  font-size: 14px;
+}
+
+.switchBtn:hover {
+  color: #0d2e27;
+}
