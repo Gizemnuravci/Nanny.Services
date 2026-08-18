@@ -1,7 +1,7 @@
 .pageWrapper {
   width: 100%;
   min-height: 100vh;
-  padding: 32px 64px;
+  padding: 16px 32px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -11,20 +11,20 @@
 
 .heroCard {
   width: 100%;
-  max-width: 1380px;
-  min-height: 720px;
-  border-radius: 24px;
+  max-width: 1280px;
+  min-height: 480px;
+  border-radius: 20px;
   display: flex;
   overflow: hidden;
   position: relative;
-  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   background: #065f46;
 }
 
 .leftContent {
-  flex: 1.02;
+  flex: 0.6;
   background-color: #065f46;
-  padding: 32px 36px 44px 36px;
+  padding: 24px 28px 28px 28px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -34,11 +34,11 @@
 .brandHeader {
   display: flex;
   align-items: center;
-  margin-bottom: 54px;
+  margin-bottom: 20px;
 }
 
 .logo {
-  font-size: 24px;
+  font-size: 16px;
   font-weight: 700;
   letter-spacing: -0.03em;
   color: #f0fdf4;
@@ -49,34 +49,34 @@
 }
 
 .title {
-  font-size: 62px;
+  font-size: 36px;
   font-weight: 700;
-  line-height: 1.04;
-  letter-spacing: -0.05em;
-  margin: 0 0 30px 0;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin: 0 0 12px 0;
   color: #fff;
 }
 
 .subtitle {
-  font-size: 24px;
+  font-size: 13px;
   line-height: 1.4;
-  letter-spacing: -0.02em;
-  color: rgba(255, 255, 255, 0.92);
-  margin: 0 0 44px 0;
-  max-width: 520px;
+  letter-spacing: -0.01em;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 16px 0;
+  max-width: 300px;
 }
 
 .getStartedBtn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  padding: 18px 32px;
-  background: #10b981;
+  gap: 8px;
+  padding: 11px 22px;
+  background: transparent;
   color: #fff;
-  border: 1px solid #10b981;
+  border: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: 999px;
-  font-size: 18px;
+  font-size: 13px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -96,12 +96,12 @@
 }
 
 .rightContent {
-  flex: 1;
+  flex: 1.4;
   position: relative;
   background: linear-gradient(
     180deg,
-    rgba(0, 0, 0, 0.18) 0%,
-    rgba(0, 0, 0, 0.08) 100%
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(0, 0, 0, 0.05) 100%
   );
   padding: 42px 54px 32px;
   display: flex;
@@ -131,23 +131,23 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  gap: 20px;
+  gap: 12px;
 }
 
 .navLinks {
   display: flex;
-  gap: 28px;
+  gap: 16px;
 }
 
 .navBtn {
   background: transparent;
   border: none;
   color: #fff;
-  font-size: 14px;
+  font-size: 11px;
   font-weight: 500;
   cursor: pointer;
   position: relative;
-  padding: 6px 0;
+  padding: 4px 0;
   opacity: 0.85;
 }
 
@@ -169,28 +169,28 @@
 
 .authButtons {
   display: flex;
-  gap: 12px;
+  gap: 8px;
 }
 
 .loginBtn,
 .registerBtn {
   border-radius: 999px;
-  font-size: 14px;
+  font-size: 11px;
   font-weight: 500;
-  padding: 12px 20px;
+  padding: 8px 14px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .loginBtn {
   background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.35);
   color: #fff;
 }
 
 .loginBtn:hover {
-  background: rgba(255, 255, 255, 0.2);
-  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.5);
 }
 
 .registerBtn {
@@ -205,19 +205,19 @@
 
 .statisticsCard {
   align-self: flex-end;
-  background-color: rgba(255, 255, 255, 0.96);
-  border-radius: 18px;
-  padding: 18px 24px;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 14px;
+  padding: 12px 16px;
   display: flex;
   align-items: center;
-  gap: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  gap: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
 .checkIconWrapper {
-  width: 42px;
-  height: 42px;
-  border-radius: 12px;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
   background-color: #10b981;
   display: flex;
   align-items: center;
@@ -226,14 +226,14 @@
 }
 
 .staTitle {
-  font-size: 14px;
-  color: rgba(17, 17, 17, 0.7);
-  margin: 0 0 4px 0;
+  font-size: 11px;
+  color: rgba(17, 17, 17, 0.65);
+  margin: 0 0 2px 0;
 }
 
 .staCount {
   margin: 0;
-  font-size: 26px;
+  font-size: 18px;
   line-height: 1.1;
   font-weight: 700;
   color: #11101c;
