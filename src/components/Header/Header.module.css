@@ -16,7 +16,7 @@
 .logo {
   font-size: 24px;
   font-weight: 700;
-  color: #fbfbfb;
+  color: #11101c;
   text-decoration: none;
 }
 
@@ -137,8 +137,9 @@
   }
 
   .container {
-    flex-wrap: wrap;
-    gap: 16px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 14px 16px;
     padding: 0 16px;
   }
 
@@ -148,12 +149,14 @@
 
   .navigation {
     order: 3;
+    grid-column: 1 / -1;
     width: 100%;
     justify-content: center;
     gap: 24px;
   }
 
   .authWrapper {
+    justify-self: end;
     gap: 8px;
   }
 
