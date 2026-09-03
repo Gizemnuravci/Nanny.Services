@@ -50,6 +50,7 @@
 
 .form input {
   width: 100%;
+  box-sizing: border-box;
   padding: 16px 18px;
   border: 1px solid rgba(17, 16, 28, 0.1);
   border-radius: 12px;
@@ -121,4 +122,25 @@
   font-size: 14px;
   text-align: center;
   margin-bottom: 8px;
+}
+
+@media (max-width: 640px) {
+  .backdrop {
+    padding: 16px;
+  }
+
+  .modal {
+    width: 100%;
+    padding: 40px 20px 24px;
+    border-radius: 20px;
+    box-sizing: border-box;
+  }
+
+  .title {
+    font-size: 30px;
+  }
+
+  .subtitle {
+    margin-bottom: 24px;
+  }
 }

@@ -73,3 +73,22 @@
 .filterSelect:focus {
   outline: 2px solid #047857;
 }
+
+@media (max-width: 640px) {
+  .favoriteSection {
+    padding: 28px 0 48px;
+  }
+
+  .container {
+    padding: 0 12px;
+  }
+
+  .cardList {
+    gap: 16px;
+  }
+
+  .emptyState {
+    padding: 48px 20px;
+    margin-top: 24px;
+  }
+}

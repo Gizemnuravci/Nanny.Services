@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { FiArrowUpRight, FiCheck } from "react-icons/fi";
 import { logoutUser } from "../../firebase/services";
@@ -23,9 +23,9 @@ const HomePage = ({ onOpenAuth = () => {} }) => {
       <section className={styles.heroCard}>
         <div className={styles.leftContent}>
           <header className={styles.brandHeader}>
-            <span className={styles.logo} onClick={() => navigate("/")}>
+            <Link to="/" className={styles.logo}>
               Nanny.Services
-            </span>
+            </Link>
           </header>
 
           <div className={styles.mainText}>

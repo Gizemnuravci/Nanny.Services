@@ -95,3 +95,30 @@
   background-color: #065f46;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
+
+@media (max-width: 640px) {
+  .mainContainer {
+    padding: 20px 12px 32px;
+  }
+
+  .filterSection {
+    margin-bottom: 20px;
+  }
+
+  .filterSelect {
+    width: 100%;
+    padding: 11px 14px;
+  }
+
+  .nannyList {
+    gap: 16px;
+  }
+
+  .loadMoreContainer {
+    margin-top: 28px;
+  }
+
+  .loadMoreBtn {
+    width: 100%;
+  }
+}

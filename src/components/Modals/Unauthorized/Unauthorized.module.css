@@ -53,3 +53,25 @@
   font-weight: 500;
   cursor: pointer;
 }
+
+@media (max-width: 640px) {
+  .backdrop {
+    padding: 16px;
+    box-sizing: border-box;
+  }
+
+  .modal {
+    width: 100%;
+    padding: 40px 20px 24px;
+    border-radius: 20px;
+    box-sizing: border-box;
+  }
+
+  .title {
+    font-size: 26px;
+  }
+
+  .loginBtn {
+    width: 100%;
+  }
+}

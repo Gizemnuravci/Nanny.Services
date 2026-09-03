@@ -130,3 +130,52 @@
   height: 20px;
   fill: #ffffff;
 }
+
+@media (max-width: 640px) {
+  .header {
+    padding: 14px 0;
+  }
+
+  .container {
+    flex-wrap: wrap;
+    gap: 16px;
+    padding: 0 16px;
+  }
+
+  .logo {
+    font-size: 20px;
+  }
+
+  .navigation {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    gap: 24px;
+  }
+
+  .authWrapper {
+    gap: 8px;
+  }
+
+  .loginBtn,
+  .registerBtn {
+    padding: 10px 14px;
+    font-size: 14px;
+  }
+
+  .userMenu {
+    gap: 8px;
+  }
+
+  .userName {
+    max-width: 90px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .logoutBtn {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+}

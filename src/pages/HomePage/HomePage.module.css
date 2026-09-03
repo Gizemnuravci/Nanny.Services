@@ -356,16 +356,38 @@
     align-items: flex-start;
     gap: 20px;
   }
-  .authButtons, .userMenu {
+  .authButtons,
+  .userMenu {
     width: 100%;
     justify-content: flex-start;
+  }
+
+  .leftContent,
+  .rightContent {
+    padding: 32px 24px;
+  }
+
+  .mainText {
+    margin-top: 24px;
+  }
+
+  .navLinks {
+    flex-wrap: wrap;
+    gap: 16px;
   }
 }
 
 @media (max-width: 480px) {
   .title {
-    font-size: 32px;
+    font-size: 30px;
   }
+
+  .title svg {
+    width: 28px;
+    height: 28px;
+    margin-right: 8px !important;
+  }
+
   .subtitle {
     font-size: 16px;
   }
@@ -375,5 +397,14 @@
   }
   .statisticsCard {
     width: 100%;
+  }
+
+  .leftContent,
+  .rightContent {
+    padding: 24px 16px;
+  }
+
+  .rightContent {
+    min-height: 400px;
   }
 }
